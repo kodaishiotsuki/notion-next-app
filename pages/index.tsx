@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps = async () => {
       pages: results ? results : [],
     },
     //ISR(リアルタイム情報時に使う)
-    revalidate: 5, //秒数
+    revalidate: 10, //秒数
   };
 };
 

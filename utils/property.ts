@@ -1,7 +1,6 @@
 /** 汎用関数  **/
 
-import { PageType } from "./../types/types";
-import { RichTextType } from "../types/types";
+import { PageType, RichTextType } from "./../types/types";
 
 export const getText = (richTextArr: RichTextType[]) => {
   try {
@@ -31,8 +30,9 @@ export const getDate = (date: { start: string }) => {
 };
 
 export const getMultiSelect = (multiSelect: [{ name: string }]) => {
+  // console.log(multiSelect);
   try {
-    multiSelect.map((tag) => tag.name);
+    return multiSelect.map((tag) => tag.name);
   } catch (err) {
     console.error(err);
   }
