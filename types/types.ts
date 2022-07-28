@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 import { ParsedUrlQuery } from "querystring";
 
+/** props **/
+
 //Layoutの型
 export type LayoutProps = {
   children: ReactNode;
@@ -16,16 +18,25 @@ export type PageProps = {
   tags: string[];
   content: string;
 };
+
 export type CardProps = {
   page: PageProps;
 };
 export type ArticleProps = CardProps;
 export type ArticleMetaProps = CardProps;
 
+export type IndexProps = {
+  pages: PageType[];
+};
+
+/** Path **/
+
 //path取得の型
 export type Params = ParsedUrlQuery & {
   slug: string;
 };
+
+/** DataType **/
 
 //Fileの型（cover→externalのタイプがfileかexternalか不明だから）
 // export type FileType = Record<"file" | "external", { url: string }>;
