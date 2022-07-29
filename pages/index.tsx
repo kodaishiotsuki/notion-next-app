@@ -11,7 +11,7 @@ import { sampleCards } from "../utils/sample";
 
 export const getStaticProps: GetStaticProps = async () => {
   //オブジェクトでNotionデータ取得
-  const { results } = await fetchPages();
+  const { results } = await fetchPages({});
   return {
     props: {
       pages: results ? results : [],
