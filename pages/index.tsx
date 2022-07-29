@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +7,24 @@ import Layout from "../components/Layout";
 import { siteConfig } from "../site.config";
 import { IndexProps } from "../types/types";
 import { fetchPages } from "../utils/notion";
+import { getText } from "../utils/property";
 import { sampleCards } from "../utils/sample";
+
+//ダイナミックルート + GetStaticProps時に定義
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { results } = await fetchPages({});
+  const paths = results.map((page: any) => {
+    return {
+      params: {
+        slug: getText(page.properties.slug.rich_text),
+      },
+    };
+  });
+  return {
+    paths: paths,
+    fallback: "blocking",
+  };
+};
 
 export const getStaticProps: GetStaticProps = async () => {
   //オブジェクトでNotionデータ取得
