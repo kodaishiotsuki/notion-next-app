@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,9 +9,11 @@ import { IndexProps } from "../types/types";
 import { fetchPages } from "../utils/notion";
 import { sampleCards } from "../utils/sample";
 
+
+
 export const getStaticProps: GetStaticProps = async () => {
   //オブジェクトでNotionデータ取得
-  const { results } = await fetchPages();
+  const { results } = await fetchPages({});
   return {
     props: {
       pages: results ? results : [],
