@@ -26,7 +26,7 @@ export const fetchPages = async ({ slug }: { slug?: string }) => {
   if (slug) {
     and.push({
       property: "slug",
-      rich_tet: {
+      rich_text: {
         equals: slug, //テキスト内容が正しいかチェック
       },
     });
