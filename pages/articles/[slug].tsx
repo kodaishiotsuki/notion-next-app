@@ -4,16 +4,23 @@ import React from "react";
 import ArticleMeta from "../../components/ArticleMeta";
 import Layout from "../../components/Layout";
 import { ArticleProps, Params } from "../../types/types";
-import { sampleCards } from "../../utils/sample";
+import { fetchBlocksByPageId, fetchPages } from "../../utils/notion";
 
 //データ取得
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params as Params; //それぞれのpathを取得 {slug}は[slug].tsxと合わせる
-  const page = sampleCards.find((data) => data.slug === slug);
+  const { results: pages } = await fetchPages({ slug: slug });
+  const page = pages[0]; //重複防止
+  const pageId = page.id;
+  // console.log(page);
+  //Block一覧取得 (変数名blocks)
+  const { results: blocks } = await fetchBlocksByPageId(pageId);
   return {
     props: {
       page: page,
+      blocks: blocks,
     },
+    revalidate: 10, //ISR設定
   };
 };
 

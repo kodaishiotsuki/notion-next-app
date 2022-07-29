@@ -47,3 +47,8 @@ export const fetchPages = async ({ slug }: { slug?: string }) => {
     ],
   });
 };
+
+//ページIDからBlock一覧を取得
+export const fetchBlocksByPageId = async (pageId: string) => {
+  return await notion.blocks.children.list({ block_id: pageId });
+};
