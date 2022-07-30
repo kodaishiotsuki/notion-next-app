@@ -8,6 +8,7 @@ import { ArticleProps, Params } from "../../types/types";
 import { fetchBlocksByPageId, fetchPages } from "../../utils/notion";
 import { getText } from "../../utils/property";
 import NotionBlocks from "notion-block-renderer";
+import { anOldHope } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 //ダイナミックルート + GetStaticProps時に定義
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -60,7 +61,11 @@ const Article: NextPage<ArticleProps> = ({ page, blocks }) => {
           ))}
         </div> */}
         <div className="my-12">
-          <NotionBlocks blocks={blocks} />
+          <NotionBlocks
+            blocks={blocks}
+            isCodeHighlighter={true}
+            syntaxHighlighterCSS={anOldHope} //好きな色に設定できる
+          />
         </div>
       </article>
     </Layout>
