@@ -43,20 +43,19 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 const Article: NextPage<ArticleProps> = ({ page, blocks }) => {
   console.log("page", page);
   console.log("blocks", blocks);
-  return <></>;
-  // return (
-  //   <Layout>
-  //     <article className="w-full">
-  //       {/* meta section */}
-  //       <div className="my-12">
-  //         <ArticleMeta page={page} />
-  //       </div>
+  return (
+    <Layout>
+      <article className="w-full">
+        {/* meta section */}
+        <div className="my-12">
+          <ArticleMeta page={page} />
+        </div>
 
-  //       {/* article */}
-  //       <div className="my-12">article {page.content} </div>
-  //     </article>
-  //   </Layout>
-  // );
+        {/* article */}
+        <div className="my-12"> {page.content} </div>
+      </article>
+    </Layout>
+  );
 };
 
 export default Article;
