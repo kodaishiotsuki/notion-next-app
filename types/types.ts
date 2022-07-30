@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { ParsedUrlQuery } from "querystring";
+import Block from "../components/Block";
 
 /** props **/
 
@@ -30,6 +31,8 @@ export type ArticleMetaProps = CardProps;
 export type IndexProps = {
   pages: PageType[];
 };
+
+export type BlockProps = { block: BlockType };
 
 /** Path **/
 
