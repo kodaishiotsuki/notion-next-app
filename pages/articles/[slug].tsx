@@ -2,10 +2,13 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from "next/image";
 import React from "react";
 import ArticleMeta from "../../components/ArticleMeta";
+import Block from "../../components/Block";
 import Layout from "../../components/Layout";
 import { ArticleProps, Params } from "../../types/types";
 import { fetchBlocksByPageId, fetchPages } from "../../utils/notion";
 import { getText } from "../../utils/property";
+import NotionBlocks from "notion-block-renderer";
+import { anOldHope } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 //ダイナミックルート + GetStaticProps時に定義
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -41,22 +44,32 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 };
 
 const Article: NextPage<ArticleProps> = ({ page, blocks }) => {
-  console.log("page", page);
-  console.log("blocks", blocks);
-  return <></>;
-  // return (
-  //   <Layout>
-  //     <article className="w-full">
-  //       {/* meta section */}
-  //       <div className="my-12">
-  //         <ArticleMeta page={page} />
-  //       </div>
+  // console.log("page", page);
+  // console.log("blocks", blocks);
+  return (
+    <Layout>
+      <article className="w-full">
+        {/* meta section */}
+        <div className="my-12">
+          <ArticleMeta page={page} />
+        </div>
 
-  //       {/* article */}
-  //       <div className="my-12">article {page.content} </div>
-  //     </article>
-  //   </Layout>
-  // );
+        {/* article */}
+        {/* <div className="my-12">
+          {blocks.map((block, index) => (
+            <Block key={index} block={block} />
+          ))}
+        </div> */}
+        <div className="my-12">
+          <NotionBlocks
+            blocks={blocks}
+            isCodeHighlighter={true}
+            syntaxHighlighterCSS={anOldHope} //好きな色に設定できる
+          />
+        </div>
+      </article>
+    </Layout>
+  );
 };
 
 export default Article;
