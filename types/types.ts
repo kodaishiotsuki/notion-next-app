@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { ParsedUrlQuery } from "querystring";
-import Block from "../components/Block";
+import { BlockType } from "notion-block-renderer";
 
 /** props **/
 
@@ -84,9 +84,9 @@ export type PageType = {
   properties: Properties;
 };
 
-export type BlockType = {
-  type: string;
-  heading_1: { rich_text: RichTextType[] };
-  heading_2: { rich_text: RichTextType[] };
-  paragraph: { rich_text: RichTextType[] };
-};
+// export type BlockType = {
+//   type: string;
+//   heading_1: { rich_text: RichTextType[] };
+//   heading_2: { rich_text: RichTextType[] };
+//   paragraph: { rich_text: RichTextType[] };
+// };
