@@ -5,8 +5,14 @@ const notion = new Client({ auth: process.env.NOTION_KEY as string });
 const DATABASE_ID = process.env.NOTION_DATABASE_ID as string;
 
 //DBからデータ取得
-// ?slugがあればstringを返す
-export const fetchPages = async ({ slug }: { slug?: string }) => {
+// ?slug,?tagがあればstringを返す(フィルター)
+export const fetchPages = async ({
+  slug,
+  tag,
+}: {
+  slug?: string;
+  tag?: string;
+}) => {
   const and: any = [
     {
       property: "isPublic",
@@ -28,6 +34,15 @@ export const fetchPages = async ({ slug }: { slug?: string }) => {
       property: "slug",
       rich_text: {
         equals: slug, //テキスト内容が正しいかチェック
+      },
+    });
+  }
+  //tagがあればand配列に追加
+  if (tag) {
+    and.push({
+      property: "tags",
+      multi_select: {
+        contains: tag, //multi_selectは配列のためcontains
       },
     });
   }

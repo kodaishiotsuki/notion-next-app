@@ -5,16 +5,18 @@ import Link from "next/link";
 import Card from "../../components/Card";
 import Layout from "../../components/Layout";
 import { siteConfig } from "../../site.config";
-import { IndexProps } from "../../types/types";
+import { IndexProps, Params } from "../../types/types";
 import { fetchPages } from "../../utils/notion";
 import { sampleCards } from "../../utils/sample";
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const { tag } = ctx.params as Params; //types.ts
   //オブジェクトでNotionデータ取得
-  const { results } = await fetchPages({});
+  const { results } = await fetchPages({ tag: tag });
   return {
     props: {
       pages: results ? results : [],
+      tag: tag,
     },
     //ISR(リアルタイム情報時に使う)
     revalidate: 10, //秒数

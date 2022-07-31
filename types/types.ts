@@ -38,7 +38,8 @@ export type BlockProps = { block: BlockType };
 
 //path取得の型
 export type Params = ParsedUrlQuery & {
-  slug: string;
+  slug?: string;
+  tag?: string;
 };
 
 /** DataType **/
