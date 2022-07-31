@@ -7,7 +7,36 @@ import Layout from "../../components/Layout";
 import { siteConfig } from "../../site.config";
 import { IndexProps, Params } from "../../types/types";
 import { fetchPages } from "../../utils/notion";
+import { getMultiSelect } from "../../utils/property";
 import { sampleCards } from "../../utils/sample";
+
+//ダイナミックルート + GetStaticProps時に定義
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { results }: { results: Record<string, any>[] } = await fetchPages({});
+
+  //pathの重複防止
+  const pathSet: Set<string> = new Set();
+
+  //tags取得
+  for (const page of results) {
+    for (const tag of getMultiSelect(page.properties.tags.multi_select)) {
+      pathSet.add(tag); //tagを追加
+    }
+  }
+
+  //tagを配列に変換しmap
+  const paths = Array.from(pathSet).map((tag) => {
+    return {
+      params: {
+        tag: tag,
+      },
+    };
+  });
+  return {
+    paths: paths,
+    fallback: "blocking",
+  };
+};
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { tag } = ctx.params as Params; //types.ts
