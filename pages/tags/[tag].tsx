@@ -5,7 +5,7 @@ import Link from "next/link";
 import Card from "../../components/Card";
 import Layout from "../../components/Layout";
 import { siteConfig } from "../../site.config";
-import { IndexProps, Params } from "../../types/types";
+import { IndexProps, Params, TagProps } from "../../types/types";
 import { fetchPages } from "../../utils/notion";
 import { getMultiSelect } from "../../utils/property";
 import { sampleCards } from "../../utils/sample";
@@ -52,13 +52,13 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   };
 };
 
-const Tag: NextPage<IndexProps> = ({ pages }) => {
+const Tag: NextPage<TagProps> = ({ pages, tag }) => {
   // console.log(pages);
   return (
     <div>
       <Layout>
         <div className="pt-12">
-          <h1 className="text-5xl mb-8">{siteConfig.title}</h1>
+          <h1 className="text-5xl mb-8">{`#${tag}`}</h1>
           <div className="grid md:gap-6 mt-10 md:grid-cols-2 w-full my-12">
             {/* Card */}
             {pages.map((page, index) => (

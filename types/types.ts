@@ -28,9 +28,9 @@ export type ArticleProps = {
 
 export type ArticleMetaProps = CardProps;
 
-export type IndexProps = {
-  pages: PageType[];
-};
+export type IndexProps = { pages: PageType[] };
+
+export type TagProps = IndexProps & { tag: string };
 
 export type BlockProps = { block: BlockType };
 
